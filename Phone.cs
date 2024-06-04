@@ -6,20 +6,24 @@ using System.Threading.Tasks;
 
 namespace AssetTracker
 {
-    class Equipment
+    internal class Phone : IDevice
     {
-        public Equipment(string type, string brand, string model, string office, DateOnly purchaseDate, decimal priceUSD, string localCurrency)
+        public Phone( string office, string brand, string model, DateOnly purchaseDate, decimal priceUSD)
         {
-            Type = type;
+            //Enum in IDevice.cs
+            Type = DeviceType.Phone;
+
+            Office = office;
             Brand = brand;
             Model = model;
-            Office = office;
             PurchaseDate = purchaseDate;
             PriceUSD = priceUSD;
-            LocalCurrency = localCurrency;
         }
 
-        public string Type
+        public DeviceType Type
+        { get; }
+
+        public string Office
         { get; }
 
         public string Brand
@@ -28,16 +32,10 @@ namespace AssetTracker
         public string Model
         { get; }
 
-        public string Office
-        { get; }
-
         public DateOnly PurchaseDate
         { get; }
 
         public decimal PriceUSD
-        { get; }
-
-        public string LocalCurrency
         { get; }
     }
 }
