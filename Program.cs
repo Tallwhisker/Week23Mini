@@ -1,30 +1,38 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 
 namespace AssetTracker
 {
-
-
     internal class Program
     {
         static void Main(string[] args)
         {
             Office Sweden = new Office("Sweden", "SEK");
             Office Germany = new Office("Germany", "EUR");
-            Office Italy = new Office("Denmark", "DKK");
+            Office Denmark = new Office("Denmark", "DKK");
 
-            List<Office> Offices = new List<Office>() { Sweden, Germany, Italy };
+            List<Office> Offices = [ 
+                Sweden, 
+                Germany, 
+                Denmark 
+            ];
 
-            Sweden.Add(new Phone("Sweden", "Apple", "iPhone", new DateOnly(2021, 12, 11), 943));
-            Sweden.Add(new Phone("Sweden", "Car", "iPhone", new DateOnly(2021, 12, 11), 943));
-            Sweden.Add(new Phone("Sweden", "Nokia", "iPhone", new DateOnly(2021, 12, 11), 943));
+
+            Sweden.Add(new Phone("Sweden", "Apple", "iPhone", new DateOnly(2024, 10, 11), 943));
+            Sweden.Add(new Phone("Sweden", "Car", "iPhone", new DateOnly(2026, 09, 11), 943));
+            Sweden.Add(new Phone("Sweden", "Nokia", "iPhone", new DateOnly(2023, 06, 05), 943));
             Sweden.Add(new Phone("Sweden", "Apple", "iPhone", new DateOnly(1992, 1, 11), 943));
-            Sweden.Add(new Phone("Sweden", "Apple", "iPhone", new DateOnly(2021, 12, 11), 943));
-            Sweden.Add(new Phone("Sweden", "Apple", "iPhone", new DateOnly(2021, 12, 11), 943));
+            Sweden.Add(new Phone("Sweden", "Fläskfilé", "iPhone", new DateOnly(2020, 12, 11), 943));
             Sweden.Add(new Phone("Sweden", "Apple", "iPhone", new DateOnly(2021, 12, 11), 943));
 
-            Sweden.List();
+            Sweden.Add(new Computer("Sweden", "Apple", "iMac", new DateOnly(2021, 12, 11), 943));
+            Sweden.Add(new Computer("Sweden", "Samsung", "KomPUtor", new DateOnly(2022, 12, 11), 943));
+            Sweden.Add(new Computer("Sweden", "Acer", "Aspire", new DateOnly(2023, 12, 11), 943));
+            Sweden.Add(new Computer("Sweden", "Asus", "Thinkpad", new DateOnly(2024, 12, 11), 943));
 
-            StringComparison compareIgnoreCase = StringComparison.OrdinalIgnoreCase;
+            Offices[0].List();
+
+            //StringComparison compareIgnoreCase = StringComparison.OrdinalIgnoreCase;
 
 
             Console.ForegroundColor = ConsoleColor.DarkCyan;
@@ -42,18 +50,19 @@ namespace AssetTracker
             {
                 Console.WriteLine($"  {location.Country}");
             }
+
             do 
             {
                 Console.Write("\n>Main Command: ");
                 input = Console.ReadLine().Trim();
 
-                switch (input)
+                switch (input.ToLower())
                 {
                     case "quit": //Exit main loop
                         break;
 
-                    case "add": //
-
+                    case "add":
+                        Offices = DeviceManager.New(Offices);
                         break;
 
                     case "list":
@@ -61,17 +70,17 @@ namespace AssetTracker
                         break;
 
                     case "remove":
-
+                        //Offices = DeviceManager.Remove(Offices);
                         break;
 
                     default: 
                         Console.WriteLine("Input not recognized.");
                         Console.WriteLine("Commands: 'add' 'list' 'remove' 'quit'");
                         break;
-
                 }
-            } while (input != "quit");
-
+            } 
+            //Loop end
+            while (input != "quit");
         }
     }
 }

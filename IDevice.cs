@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace AssetTracker
 {
+    //Update switch statement in DeviceManager if adding new types
     public enum DeviceType
     {
         Computer,
