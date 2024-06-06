@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace AssetTracker
 {
-    internal static class DeviceManager
+    internal static class AssetManager
     {
 
         //Method to add devices to selected office.

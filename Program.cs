@@ -62,7 +62,7 @@ namespace AssetTracker
                         break;
 
                     case "add":
-                        Offices = DeviceManager.New(Offices);
+                        Offices = AssetManager.New(Offices);
                         break;
 
                     case "list":

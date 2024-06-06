@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
+using System.Xml;
 
 namespace AssetTracker
 {
@@ -27,7 +29,8 @@ namespace AssetTracker
                 case "EUR":
                     break;
 
-                default:
+                default: 
+                    newValue = -1;
                     break;
             }
             return newValue;
@@ -35,7 +38,17 @@ namespace AssetTracker
 
         static public void Update() 
         {
-            //yada yada get new rates?
+            XmlSerializer serializer = new XmlSerializer(typeof(Envelope));
+            XmlReader xmlReader = XmlReader.Create(urlPath);
+            using (xmlReader)
+            {
+                Envelope envelope = (Envelope)(serializer.Deserialize(xmlReader));
+
+                foreach (var cube in envelope.Cube.Cube1.Cube)
+                {
+                    Console.WriteLine($"Curr: {cube.currency}, Rate: {cube.rate}");
+                }
+            }
         }
     }
 }
