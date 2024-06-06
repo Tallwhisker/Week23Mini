@@ -15,7 +15,6 @@ namespace AssetTracker
         internal static List<Office> NewDevice(List<Office> offices)
         {
             Console.WriteLine("Select office with index.");
-
             ListOffices(offices);
 
             Console.Write("\nAdd/ Office index: ");
@@ -55,11 +54,11 @@ namespace AssetTracker
                 " Computer\n"
             );
 
+
             string? deviceType;
             do
             {
                 Console.WriteLine("Add device or type 'exit' to save.");
-
                 Console.Write("Add/ Device Type: ");
                 deviceType = Console.ReadLine().Trim();
 
@@ -210,6 +209,7 @@ namespace AssetTracker
             }
         }
 
+
         internal static void ListDevices(List<Office> offices)
         {
             Console.WriteLine("\nSelect office with index or type 'all' to list all.");
@@ -286,6 +286,7 @@ namespace AssetTracker
                 return offices;
             }
 
+
             string? input;
             do
             {
@@ -312,7 +313,6 @@ namespace AssetTracker
 
                 //Access error handling is done inside method
                 offices[officeIndex].Remove(deviceIndex);
-
             }
             while (input != "exit");
 

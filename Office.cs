@@ -81,7 +81,7 @@ namespace AssetTracker
         {
             this.Assets.Add(item);
 
-            //After adding new item, sort List by IENum > Date
+            //After adding new item, sort List by Enum > Date
             this.Assets = this.Assets.OrderBy(x => x.Type)
                 .ThenBy(x => x.PurchaseDate).ToList();
         }
@@ -107,7 +107,7 @@ namespace AssetTracker
                 Console.WriteLine(e);
             }
 
-            //After removing an item, sort List by IENum > Date
+            //After removing an item, sort List by Enum > Date
             this.Assets = this.Assets.OrderBy(x => x.Type)
             .ThenBy(x => x.PurchaseDate).ToList();
         }

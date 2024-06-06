@@ -11,8 +11,6 @@ namespace AssetTracker
     static class CurrencyConverter
     {
         static private string xmlUrl = "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml";
-        static private string localUrl = @"C:\Users\kevin\Downloads\eurofxref-daily-1.xml";
-
         static Envelope envelope = CurrencyConverter.Update();
 
 
@@ -55,7 +53,7 @@ namespace AssetTracker
             try 
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(Envelope));
-                XmlReader xmlReader = XmlReader.Create(localUrl);
+                XmlReader xmlReader = XmlReader.Create(xmlUrl);
 
                 using (xmlReader)
                 {

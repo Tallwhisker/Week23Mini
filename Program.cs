@@ -14,7 +14,7 @@ namespace AssetTracker
     {
         static void Main(string[] args)
         {
-            //Currently implemented offices.
+            //Sample offices
             Office Sweden = new Office("Sweden", "SEK");
             Office Germany = new Office("Germany", "EUR");
             Office Denmark = new Office("Denmark", "DKK");
@@ -28,8 +28,7 @@ namespace AssetTracker
                 Poland
             ];
 
-            //Sample Data
-
+            //Sample devices
             Sweden.Add(new Computer("Sweden", "Acer", "Aspire", new DateOnly(2021, 11, 28), 100));
             Sweden.Add(new Computer("Sweden", "Lenovo", "Thinkpad", new DateOnly(1998, 05, 15), 500));
             Sweden.Add(new Phone("Sweden", "Apple", "iPhone", new DateOnly(2024, 10, 11), 750));
@@ -49,8 +48,6 @@ namespace AssetTracker
             Poland.Add(new Computer("Poland", "Bärgar", "Berra", new DateOnly(2027, 01, 08), 500));
             Poland.Add(new Phone("Poland", "Bosch", "Indestructible", new DateOnly(2022, 01, 01), 750));
             Poland.Add(new Phone("Poland", "I like", "Cats", new DateOnly(1890, 12, 11), 945));
-
-
 
 
             Console.ForegroundColor = ConsoleColor.Cyan;
