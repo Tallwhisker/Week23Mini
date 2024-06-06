@@ -1,16 +1,25 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 
+
+/* 
+Device types are defined in IDevice.cs.
+If updating, edit switch statement in AssetManager/Add:142
+and console output in AssetManager/Add:54
+ */
+
 namespace AssetTracker
 {
     internal class Program
     {
         static void Main(string[] args)
         {
+            //Currently implemented offices.
             Office Sweden = new Office("Sweden", "SEK");
             Office Germany = new Office("Germany", "EUR");
             Office Denmark = new Office("Denmark", "DKK");
 
+            //Put offices in List
             List<Office> Offices = [ 
                 Sweden, 
                 Germany, 
@@ -30,34 +39,31 @@ namespace AssetTracker
             Sweden.Add(new Computer("Sweden", "Acer", "Aspire", new DateOnly(2023, 12, 11), 500));
             Sweden.Add(new Computer("Sweden", "Asus", "Thinkpad", new DateOnly(2024, 12, 11), 943));
 
-            foreach (var office in Offices)
-            {
-                office.List();
-            }
-
-            //StringComparison compareIgnoreCase = StringComparison.OrdinalIgnoreCase;
+            //foreach (var office in Offices)
+            //{
+            //    office.List();
+            //}
 
 
-            Console.ResetColor();
-            Console.WriteLine("\nAsset Tracker");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("  ---------------------");
+            Console.WriteLine("  ||  Asset Tracker  ||");
+            Console.WriteLine("  ---------------------");
             Console.WriteLine(">Main Commands:\n" +
-                "'add' to add new equipment\n" +
+                "'add' to add new devices\n" +
                 "'list' to display offices\n" +
-                "'remove' to remove equipment\n" +
-                "" +
-                "'quit' to exit the program.");
+                "'remove' to remove devices\n" +
+                "'quit' to exit the program."
+            );
 
             string? input;
             Console.WriteLine("\nOffice locations:");
-            foreach (var location in Offices)
-            {
-                Console.WriteLine($"  {location.Country}");
-            }
+            AssetManager.ListOffices(Offices);
 
             do 
             {
                 Console.ResetColor();
-                Console.Write("\n>Main Command: ");
+                Console.Write("\nMain/ Command: ");
                 input = Console.ReadLine().Trim();
 
                 switch (input.ToLower())
@@ -70,11 +76,11 @@ namespace AssetTracker
                         break;
 
                     case "list":
-
+                        AssetManager.ListDevices(Offices);
                         break;
 
                     case "remove":
-                        //Offices = DeviceManager.Remove(Offices);
+                        Offices = AssetManager.RemoveDevice(Offices);
                         break;
 
                     default: 

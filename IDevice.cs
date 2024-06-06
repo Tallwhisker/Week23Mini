@@ -13,6 +13,7 @@ namespace AssetTracker
         Phone
     }
 
+
     public interface IDevice
     {
         DeviceType Type
@@ -32,7 +33,5 @@ namespace AssetTracker
 
         decimal PriceUSD
         { get; }
-
-
     }
 }

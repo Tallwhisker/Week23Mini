@@ -17,6 +17,7 @@ namespace AssetTracker
 
         static public decimal ConvertTo(decimal value, string currency, out decimal newValue)
         {
+            //If something is very wrong the returned value is -1
             newValue = -1;
 
             //Make USD currency input to EURO
@@ -34,7 +35,6 @@ namespace AssetTracker
                 return newValue;
             }
 
-
             //Find and convert to input currency
             foreach (var cube in envelope.Cube.Cube1.Cube)
             {
@@ -47,16 +47,19 @@ namespace AssetTracker
             return newValue;
         }
 
+
         static public Envelope Update() 
         {
             try 
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(Envelope));
                 XmlReader xmlReader = XmlReader.Create(localUrl);
+
                 using (xmlReader)
                 {
                     envelope = (Envelope)(serializer.Deserialize(xmlReader));
                 }
+
                 return envelope;
             } 
             catch (Exception ex) 
