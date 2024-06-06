@@ -33,7 +33,7 @@ namespace AssetTracker
                 $"Office".PadRight(10) +
                 $"Type".PadRight(15) +
                 $"Brand".PadRight(15) +
-                $"Model".PadRight(15) +
+                $"Model".PadRight(20) +
                 $"Purchase Date".PadRight(20) +
                 $"Price USD".PadRight(15) +
                 $"Local price"
@@ -44,7 +44,7 @@ namespace AssetTracker
             {
                 //Get PurchaseDate and add 3 years for End-of-life calculation
                 DateTime itemDate = DateTime.Parse(item.PurchaseDate.ToString());
-                itemDate.AddYears(3);
+                itemDate = itemDate.AddYears(3);
                 TimeSpan diff = itemDate - DateTime.Now;
 
                 CurrencyConverter.ConvertTo(item.PriceUSD, this.Currency, out decimal localPrice);
@@ -65,7 +65,7 @@ namespace AssetTracker
                     $"{item.Office, -10}" +
                     $"{item.Type, -15}" +
                     $"{item.Brand, -15}" +
-                    $"{item.Model, -15}" +
+                    $"{item.Model, -20}" +
                     $"{item.PurchaseDate, -20}" +
                     $"${item.PriceUSD, -14}" +
                     $"{this.Currency} {Math.Round(localPrice)}"
@@ -103,7 +103,7 @@ namespace AssetTracker
             }
             catch (Exception e)
             {
-                Console.WriteLine("Unknown error processing device index.");
+                Console.WriteLine("Error processing device index.");
                 Console.WriteLine(e);
             }
 

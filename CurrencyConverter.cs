@@ -12,6 +12,7 @@ namespace AssetTracker
     {
         static private string xmlUrl = "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml";
         static private string localUrl = @"C:\Users\kevin\Downloads\eurofxref-daily-1.xml";
+
         static Envelope envelope = CurrencyConverter.Update();
 
 
@@ -41,6 +42,7 @@ namespace AssetTracker
                 if (cube.currency == currency) 
                 {
                     newValue *= cube.rate;
+                    break;
                 }
             }
 

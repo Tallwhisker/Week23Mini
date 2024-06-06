@@ -18,31 +18,39 @@ namespace AssetTracker
             Office Sweden = new Office("Sweden", "SEK");
             Office Germany = new Office("Germany", "EUR");
             Office Denmark = new Office("Denmark", "DKK");
+            Office Poland = new Office("Poland", "PLN");
 
             //Put offices in List
             List<Office> Offices = [ 
                 Sweden, 
                 Germany, 
-                Denmark 
+                Denmark,
+                Poland
             ];
 
+            //Sample Data
 
-            Sweden.Add(new Phone("Sweden", "Apple", "iPhone", new DateOnly(2024, 10, 11), 1));
-            Sweden.Add(new Phone("Sweden", "Car", "iPhone", new DateOnly(2026, 09, 11), 5));
-            Sweden.Add(new Phone("Sweden", "Nokia", "iPhone", new DateOnly(2023, 06, 05), 100));
-            Sweden.Add(new Phone("Sweden", "Apple", "iPhone", new DateOnly(1992, 1, 11), 200));
-            Denmark.Add(new Phone("Denmark", "Fläskfilé", "iPhone", new DateOnly(2020, 12, 11), 10));
-            Germany.Add(new Phone("Germany", "Apple", "iPhone", new DateOnly(2021, 12, 11), 10));
+            Sweden.Add(new Computer("Sweden", "Acer", "Aspire", new DateOnly(2021, 11, 28), 100));
+            Sweden.Add(new Computer("Sweden", "Lenovo", "Thinkpad", new DateOnly(1998, 05, 15), 500));
+            Sweden.Add(new Phone("Sweden", "Apple", "iPhone", new DateOnly(2024, 10, 11), 750));
+            Sweden.Add(new Phone("Sweden", "Samsung", "Galaxy S20 Ultra", new DateOnly(2021, 06, 06), 945));
 
-            Germany.Add(new Computer("Germany", "Apple", "iMac", new DateOnly(2021, 12, 11), 500));
-            Denmark.Add(new Computer("Denmark", "Samsung", "KomPUtor", new DateOnly(2022, 12, 11), 500));
-            Sweden.Add(new Computer("Sweden", "Acer", "Aspire", new DateOnly(2023, 12, 11), 500));
-            Sweden.Add(new Computer("Sweden", "Asus", "Thinkpad", new DateOnly(2024, 12, 11), 943));
+            Germany.Add(new Computer("Germany", "Apple", "Mac", new DateOnly(2021, 12, 19), 100));
+            Germany.Add(new Computer("Germany", "Acer", "HelloThere", new DateOnly(2002, 08, 30), 500));
+            Germany.Add(new Phone("Germany", "Pling", "Plong", new DateOnly(2021, 10, 11), 750));
+            Germany.Add(new Phone("Germany", "Ein", "Telefon", new DateOnly(2023, 01, 11), 945));
 
-            //foreach (var office in Offices)
-            //{
-            //    office.List();
-            //}
+            Denmark.Add(new Computer("Denmark", "Raspberry", "Pi6", new DateOnly(2024, 05, 20), 100));
+            Denmark.Add(new Computer("Denmark", "Fractal", "UberPC", new DateOnly(2021, 12, 05), 500));
+            Denmark.Add(new Phone("Denmark", "Pikachu", "IsYellow", new DateOnly(2020, 12, 11), 750));
+            Denmark.Add(new Phone("Denmark", "I have", "Fun", new DateOnly(2021, 12, 05), 945));
+
+            Poland.Add(new Computer("Poland", "The", "Mandalorian", new DateOnly(2024, 05, 20), 100));
+            Poland.Add(new Computer("Poland", "Bärgar", "Berra", new DateOnly(2027, 01, 08), 500));
+            Poland.Add(new Phone("Poland", "Bosch", "Indestructible", new DateOnly(2022, 01, 01), 750));
+            Poland.Add(new Phone("Poland", "I like", "Cats", new DateOnly(1890, 12, 11), 945));
+
+
 
 
             Console.ForegroundColor = ConsoleColor.Cyan;
@@ -62,9 +70,10 @@ namespace AssetTracker
 
             do 
             {
-                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write("\nMain/ Command: ");
                 input = Console.ReadLine().Trim();
+                Console.ResetColor();
 
                 switch (input.ToLower())
                 {
@@ -72,7 +81,7 @@ namespace AssetTracker
                         break;
 
                     case "add":
-                        Offices = AssetManager.New(Offices);
+                        Offices = AssetManager.NewDevice(Offices);
                         break;
 
                     case "list":

@@ -12,9 +12,8 @@ namespace AssetTracker
     {
 
         //Method to add devices to selected office.
-        internal static List<Office> New(List<Office> offices)
+        internal static List<Office> NewDevice(List<Office> offices)
         {
-
             Console.WriteLine("Select office with index.");
 
             ListOffices(offices);
@@ -59,7 +58,6 @@ namespace AssetTracker
             string? deviceType;
             do
             {
-                Console.ResetColor();
                 Console.WriteLine("Add device or type 'exit' to save.");
 
                 Console.Write("Add/ Device Type: ");
@@ -138,7 +136,7 @@ namespace AssetTracker
                 }
 
 
-                //Constructor for Devices, IDevice.cs also contains IENumerable for types.
+                //Constructor for Devices, IDevice.cs contains IENumerable for types.
                 switch (deviceType.ToLower())
                 {
                     case "phone":
@@ -178,7 +176,7 @@ namespace AssetTracker
                         break;
                 }
             }
-            //End of loop condition from first input
+            //Loop condition from first input
             while (deviceType != "exit");
 
             //Return modified offices list.
@@ -215,7 +213,6 @@ namespace AssetTracker
         internal static void ListDevices(List<Office> offices)
         {
             Console.WriteLine("\nSelect office with index or type 'all' to list all.");
-
             ListOffices(offices);
 
             Console.Write("\nList/ Office index or 'all': ");
@@ -226,12 +223,12 @@ namespace AssetTracker
             {
                 foreach (var office in offices)
                 {
+                    //Office prints its own devices with title
                     office.List();
                 }
             }
             else if (!isIndexNumber)
             {
-                //If main input isn't a number, error and return unmodified offices list.
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Error: Index needs to be a valid number or 'all'.");
             }
@@ -239,7 +236,6 @@ namespace AssetTracker
             {
                 try
                 {
-                    //Office prints its own devices with title
                     offices[officeIndex].List();
                 }
                 catch (ArgumentOutOfRangeException)
@@ -249,7 +245,7 @@ namespace AssetTracker
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Unknown error processing office index.");
+                    Console.WriteLine("Error processing office index.");
                     Console.WriteLine(e);
                 }
             }
@@ -258,7 +254,6 @@ namespace AssetTracker
         internal static List<Office> RemoveDevice(List<Office> offices) 
         {
             Console.WriteLine("Select office with index.");
-
             ListOffices(offices);
 
             Console.Write("\nRemove/ Office index: ");
@@ -286,7 +281,7 @@ namespace AssetTracker
             }
             catch (Exception e)
             {
-                Console.WriteLine("Unknown error processing office index.");
+                Console.WriteLine("Error processing office index.");
                 Console.WriteLine(e);
                 return offices;
             }
@@ -296,8 +291,7 @@ namespace AssetTracker
             {
                 Console.ResetColor();
                 offices[officeIndex].List();
-
-                Console.WriteLine("\nSelect device with index or 'exit' to save");
+                Console.WriteLine("\nSelect device with index or 'exit' when done");
                 Console.Write("Remove/ Device index: ");
 
                 input = Console.ReadLine().Trim();
@@ -307,8 +301,7 @@ namespace AssetTracker
                 {
                     return offices;
                 }
-
-                if (!isIndexNumber)
+                else if (!isIndexNumber)
                 {
                     //If main input isn't a number, error and return unmodified offices list.
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -317,6 +310,7 @@ namespace AssetTracker
                     return offices;
                 }
 
+                //Access error handling is done inside method
                 offices[officeIndex].Remove(deviceIndex);
 
             }
