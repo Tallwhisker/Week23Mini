@@ -18,24 +18,27 @@ namespace AssetTracker
             ];
 
 
-            Sweden.Add(new Phone("Sweden", "Apple", "iPhone", new DateOnly(2024, 10, 11), 943));
-            Sweden.Add(new Phone("Sweden", "Car", "iPhone", new DateOnly(2026, 09, 11), 943));
-            Sweden.Add(new Phone("Sweden", "Nokia", "iPhone", new DateOnly(2023, 06, 05), 943));
-            Sweden.Add(new Phone("Sweden", "Apple", "iPhone", new DateOnly(1992, 1, 11), 943));
-            Sweden.Add(new Phone("Sweden", "Fläskfilé", "iPhone", new DateOnly(2020, 12, 11), 943));
-            Sweden.Add(new Phone("Sweden", "Apple", "iPhone", new DateOnly(2021, 12, 11), 943));
+            Sweden.Add(new Phone("Sweden", "Apple", "iPhone", new DateOnly(2024, 10, 11), 1));
+            Sweden.Add(new Phone("Sweden", "Car", "iPhone", new DateOnly(2026, 09, 11), 5));
+            Sweden.Add(new Phone("Sweden", "Nokia", "iPhone", new DateOnly(2023, 06, 05), 100));
+            Sweden.Add(new Phone("Sweden", "Apple", "iPhone", new DateOnly(1992, 1, 11), 200));
+            Denmark.Add(new Phone("Denmark", "Fläskfilé", "iPhone", new DateOnly(2020, 12, 11), 10));
+            Germany.Add(new Phone("Germany", "Apple", "iPhone", new DateOnly(2021, 12, 11), 10));
 
-            Sweden.Add(new Computer("Sweden", "Apple", "iMac", new DateOnly(2021, 12, 11), 943));
-            Sweden.Add(new Computer("Sweden", "Samsung", "KomPUtor", new DateOnly(2022, 12, 11), 943));
-            Sweden.Add(new Computer("Sweden", "Acer", "Aspire", new DateOnly(2023, 12, 11), 943));
+            Germany.Add(new Computer("Germany", "Apple", "iMac", new DateOnly(2021, 12, 11), 500));
+            Denmark.Add(new Computer("Denmark", "Samsung", "KomPUtor", new DateOnly(2022, 12, 11), 500));
+            Sweden.Add(new Computer("Sweden", "Acer", "Aspire", new DateOnly(2023, 12, 11), 500));
             Sweden.Add(new Computer("Sweden", "Asus", "Thinkpad", new DateOnly(2024, 12, 11), 943));
 
-            Offices[0].List();
+            foreach (var office in Offices)
+            {
+                office.List();
+            }
 
             //StringComparison compareIgnoreCase = StringComparison.OrdinalIgnoreCase;
 
 
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.ResetColor();
             Console.WriteLine("\nAsset Tracker");
             Console.WriteLine(">Main Commands:\n" +
                 "'add' to add new equipment\n" +
@@ -53,6 +56,7 @@ namespace AssetTracker
 
             do 
             {
+                Console.ResetColor();
                 Console.Write("\n>Main Command: ");
                 input = Console.ReadLine().Trim();
 

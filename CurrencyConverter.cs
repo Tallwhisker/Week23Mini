@@ -11,43 +11,58 @@ namespace AssetTracker
     static class CurrencyConverter
     {
         static private string xmlUrl = "https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml";
-        //UpdateRates
-        //ConvertTo
+        static private string localUrl = @"C:\Users\kevin\Downloads\eurofxref-daily-1.xml";
+        static Envelope envelope = CurrencyConverter.Update();
+
+
         static public decimal ConvertTo(decimal value, string currency, out decimal newValue)
         {
-            newValue = 0;
-            switch (currency)
+            newValue = -1;
+
+            //Make USD currency input to EURO
+            foreach (var cube in envelope.Cube.Cube1.Cube)
             {
-                case "USD":
-                    newValue *= (decimal)1.5555;
+                if (cube.currency == "USD")
+                {
+                    newValue = value / cube.rate;
                     break;
-
-                case "SEK":
-                    newValue *= (decimal)11.3755;
-                    break;
-
-                case "EUR":
-                    break;
-
-                default: 
-                    newValue = -1;
-                    break;
+                }
             }
+
+            if (currency == "EUR")
+            {
+                return newValue;
+            }
+
+
+            //Find and convert to input currency
+            foreach (var cube in envelope.Cube.Cube1.Cube)
+            {
+                if (cube.currency == currency) 
+                {
+                    newValue *= cube.rate;
+                }
+            }
+
             return newValue;
         }
 
-        static public void Update() 
+        static public Envelope Update() 
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(Envelope));
-            XmlReader xmlReader = XmlReader.Create(urlPath);
-            using (xmlReader)
+            try 
             {
-                Envelope envelope = (Envelope)(serializer.Deserialize(xmlReader));
-
-                foreach (var cube in envelope.Cube.Cube1.Cube)
+                XmlSerializer serializer = new XmlSerializer(typeof(Envelope));
+                XmlReader xmlReader = XmlReader.Create(localUrl);
+                using (xmlReader)
                 {
-                    Console.WriteLine($"Curr: {cube.currency}, Rate: {cube.rate}");
+                    envelope = (Envelope)(serializer.Deserialize(xmlReader));
                 }
+                return envelope;
+            } 
+            catch (Exception ex) 
+            {
+                Console.WriteLine(ex.ToString());
+                return new Envelope();
             }
         }
     }
